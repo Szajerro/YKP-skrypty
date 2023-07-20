@@ -29,7 +29,7 @@ hydro = requests.get("http://danepubliczne.imgw.pl/api/data/hydro/").text
 hydro_data = json.loads(hydro)
 for item in hydro_data:
     if item['id_stacji'] == '152210170':
-        bulwary_dict = item | pomost_dict
+        bulwary_dict = item.update(pomost_dict)
 bulwary_df = pd.DataFrame(pd.Series(bulwary_dict)).T
 bulwary_df.fillna('',inplace=True)
 
