@@ -67,6 +67,10 @@ final_df['zjawisko_lodowe_data_pomiaru'] = final_df['zjawisko_lodowe_data_pomiar
 final_df['temperatura_wody'] = final_df['temperatura_wody'].apply(lambda x: int(x) if x != '' else '')
 final_df['zjawisko_lodowe'] = final_df['zjawisko_lodowe'].apply(lambda x: int(x) if x != '' else '')
 
+final_df['8+ komfortowe zejście'] = final_df['8+ komfortowe zejście'].apply(lambda x: int(x) if x != '' else '')
+final_df['8+ ostrożne zejście'] = final_df['8+ ostrożne zejście'].apply(lambda x: int(x) if x != '' else '')
+final_df['4+ komfortowe zejście'] = final_df['4+ komfortowe zejście'].apply(lambda x: int(x) if x != '' else '')
+final_df['4+ ostrożne zejście'] = final_df['4+ ostrożne zejście'].apply(lambda x: int(x) if x != '' else '')
 
 dataframe_to_update = final_df
 worksheet.update([dataframe_to_update.columns.values.tolist()] + dataframe_to_update.values.tolist())
