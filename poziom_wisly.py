@@ -28,8 +28,6 @@ print("\nPARAMETRY POMOSTU")
 print(pomost_dict)
 
 hydro = requests.get("http://danepubliczne.imgw.pl/api/data/hydro/")
-print('\nSTATUS REQUESTA Z IMGW:')
-print(hydro.status)
 hydro_data = json.loads(hydro.text)
 for item in hydro_data:
     if item['id_stacji'] == '152210170':
