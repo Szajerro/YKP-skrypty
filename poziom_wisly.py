@@ -24,6 +24,8 @@ worksheet = spreadsheet.worksheet(worksheet_name)
 pomost_df = pd.DataFrame(worksheet.get_all_values()[1:],columns=worksheet.get_all_values()[0])
 pomost_df.set_index('Key',inplace=True)
 pomost_dict = dict(pomost_df['Value'])
+print("\nPARAMETRY POMOSTU")
+print(pomost_dict)
 
 hydro = requests.get("http://danepubliczne.imgw.pl/api/data/hydro/").text
 hydro_data = json.loads(hydro)
@@ -32,6 +34,8 @@ for item in hydro_data:
         bulwary_dict = item.update(pomost_dict)
 bulwary_df = pd.DataFrame(pd.Series(bulwary_dict)).T
 bulwary_df.fillna('',inplace=True)
+print("\nDANE IMGW")
+print(bulwary_dict)
 
 def to_spreadsheet_date(x):
     time = dt.datetime.strptime(x,'%Y-%m-%d %H:%M:%S')
@@ -46,6 +50,8 @@ worksheet_name = 'Poziom wody'
 spreadsheet = gspread_client.open_by_key(spreadsheet_id)
 worksheet = spreadsheet.worksheet(worksheet_name)
 spreadsheet_data = pd.DataFrame(worksheet.get_all_values()[1:],columns=worksheet.get_all_values()[0])
+print("\nDANE ZE SPREADSHEETA")
+print(spreadsheet_data)
 
 final_df = pd.concat([bulwary_df,spreadsheet_data],axis=0)
 final_df.fillna('',inplace=True)
