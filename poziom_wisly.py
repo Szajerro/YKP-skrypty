@@ -27,11 +27,14 @@ pomost_dict = dict(pomost_df['Value'])
 print("\nPARAMETRY POMOSTU")
 print(pomost_dict)
 
-hydro = requests.get("http://danepubliczne.imgw.pl/api/data/hydro/").text
-hydro_data = json.loads(hydro)
+hydro = requests.get("http://danepubliczne.imgw.pl/api/data/hydro/")
+print('\nSTATUS REQUESTA Z IMGW:')
+print(hydro.status)
+hydro_data = json.loads(hydro.text)
 for item in hydro_data:
     if item['id_stacji'] == '152210170':
-        bulwary_dict = item.update(pomost_dict)
+        bulwary_dict = item
+bulwary_dict.update(pomost_dict)
 bulwary_df = pd.DataFrame(pd.Series(bulwary_dict)).T
 bulwary_df.fillna('',inplace=True)
 print("\nDANE IMGW")
